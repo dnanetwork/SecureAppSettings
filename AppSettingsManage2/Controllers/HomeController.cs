@@ -29,9 +29,16 @@ namespace AppSettingsManage2.Controllers
 
             // Get the value from one level deep from the section using GetValue
 
-            ViewBag.Name = _configuration.GetValue<string>("Home:Name");
-            ViewBag.Email = _configuration.GetValue<string>("Home:Email");
-            ViewBag.Phone = _configuration.GetValue<string>("Home:Phone");
+            //ViewBag.Name = _configuration.GetValue<string>("Home:Name");
+            //ViewBag.Email = _configuration.GetValue<string>("Home:Email");
+            //ViewBag.Phone = _configuration.GetValue<string>("Home:Phone");
+
+            // Get the value from one level deep from the section using GetValue
+
+            ViewBag.Name = _configuration.GetSection("Home").GetValue<string>("Name"); ;
+            ViewBag.Email = _configuration.GetSection("Home").GetValue<string>("Email"); ;
+            ViewBag.Phone = _configuration.GetSection("Home").GetValue<string>("Phone"); ;
+
 
             return View();
         }
