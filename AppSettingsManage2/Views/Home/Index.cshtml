@@ -1,4 +1,6 @@
-﻿@{
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration config;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -29,7 +31,20 @@
 </div>
 
 <div class="text-center">
-    This is using the _configuration.GetValue with First level of Nesting =>  @ViewBag.NestedData
+    This is using the _configuration.GetValue with Third level of Nesting =>  @ViewBag.NestedData
     <br />
    
+</div>
+
+<div class="text-center" style="margin-top:20px;">
+
+</div>
+
+<div class="text-center">
+    This is using the injection from view to access Name =>  @config.GetSection("Home:Name").Value;
+    <br />
+    This is using the injection from view to access Email =>   @config.GetSection("Home:Email").Value;
+    <br />
+    This is using the injection from view to access Phone =>   @config.GetSection("Home:Phone").Value;
+    <br />
 </div>
