@@ -39,6 +39,16 @@ namespace AppSettingsManage2.Controllers
             ViewBag.Email = _configuration.GetSection("Home").GetValue<string>("Email"); ;
             ViewBag.Phone = _configuration.GetSection("Home").GetValue<string>("Phone"); ;
 
+            // This is to get the Nested data out by using Get Section.
+            //ViewBag.NestedData = _configuration.GetSection("Nested").
+            //                                    GetSection("Level1").
+            //                                    GetSection("Level2").
+            //                                    GetValue<string>("Level3"); ;
+
+            ViewBag.NestedData = _configuration.GetSection("Nested").
+                                               GetSection("Level1").
+                                               GetSection("Level2").
+                                               GetSection("Level3").Value;
 
             return View();
         }
