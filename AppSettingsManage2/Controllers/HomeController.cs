@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,11 +15,17 @@ namespace AppSettingsManage2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
+        private HomeModel homeModel;
+        private readonly IOptions<HomeModel> _options;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration,IOptions<HomeModel> options)
         {
             _logger = logger;
             _configuration = configuration;
+            //homeModel = new HomeModel();
+            //configuration.GetSection("Home").Bind(homeModel);
+            _options = options;
         }
 
         public IActionResult Index()
@@ -35,9 +42,21 @@ namespace AppSettingsManage2.Controllers
 
             // Get the value from one level deep from the section using GetValue
 
-            ViewBag.Name = _configuration.GetSection("Home").GetValue<string>("Name"); ;
-            ViewBag.Email = _configuration.GetSection("Home").GetValue<string>("Email"); ;
-            ViewBag.Phone = _configuration.GetSection("Home").GetValue<string>("Phone"); ;
+            //ViewBag.Name = _configuration.GetSection("Home").GetValue<string>("Name"); ;
+            //ViewBag.Email = _configuration.GetSection("Home").GetValue<string>("Email"); ;
+            //ViewBag.Phone = _configuration.GetSection("Home").GetValue<string>("Phone"); ;
+
+            // Get the value from Home Model and using Bind method.
+
+            //ViewBag.Name = homeModel.Name;
+            //ViewBag.Email = homeModel.Email;
+            //ViewBag.Phone = homeModel.Phone;
+
+            // Get the value from Home Model and using IOption.
+
+            ViewBag.Name = _options.Value.Name;
+            ViewBag.Email = _options.Value.Email;
+            ViewBag.Phone = _options.Value.Phone;
 
             // This is to get the Nested data out by using Get Section.
             //ViewBag.NestedData = _configuration.GetSection("Nested").
