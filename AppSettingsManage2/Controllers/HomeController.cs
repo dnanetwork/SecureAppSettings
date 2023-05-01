@@ -15,17 +15,18 @@ namespace AppSettingsManage2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
-        private HomeModel homeModel;
-        private readonly IOptions<HomeModel> _options;
+        private readonly HomeModel _homeModel;
+        //private readonly IOptions<HomeModel> _options;
 
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration,IOptions<HomeModel> options)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, HomeModel homeModel)
         {
             _logger = logger;
             _configuration = configuration;
             //homeModel = new HomeModel();
             //configuration.GetSection("Home").Bind(homeModel);
-            _options = options;
+            //_options = options;
+            _homeModel = homeModel;
         }
 
         public IActionResult Index()
@@ -54,9 +55,15 @@ namespace AppSettingsManage2.Controllers
 
             // Get the value from Home Model and using IOption.
 
-            ViewBag.Name = _options.Value.Name;
-            ViewBag.Email = _options.Value.Email;
-            ViewBag.Phone = _options.Value.Phone;
+            //ViewBag.Name = _options.Value.Name;
+            //ViewBag.Email = _options.Value.Email;
+            //ViewBag.Phone = _options.Value.Phone;
+
+            // Get the value from Home Model and Extension Method
+
+            ViewBag.Name = _homeModel.Name;
+            ViewBag.Email = _homeModel.Email;
+            ViewBag.Phone = _homeModel.Phone;
 
             // This is to get the Nested data out by using Get Section.
             //ViewBag.NestedData = _configuration.GetSection("Nested").

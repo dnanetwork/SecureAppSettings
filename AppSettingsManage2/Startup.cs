@@ -1,3 +1,4 @@
+using AppSettingsManage2.Extension;
 using AppSettingsManage2.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +25,8 @@ namespace AppSettingsManage2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<HomeModel>(Configuration.GetSection("Home"));
+            services.ConfigureConfiguration<HomeModel>(Configuration, "Home");
+            //services.Configure<HomeModel>(Configuration.GetSection("Home"));
             services.AddControllersWithViews();
         }
 
